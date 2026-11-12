@@ -60,7 +60,7 @@ DWORD M_NTFSSECT_API NtfsSectGetFileVcnExtent(
       return ERROR_INVALID_PARAMETER;
 
     input.StartingVcn = *Vcn;
-    DeviceIoControl(
+    (void)DeviceIoControl(
         File,
         FSCTL_GET_RETRIEVAL_POINTERS,
         &input,
@@ -126,10 +126,10 @@ static DWORD NtfsSectGetVolumeHandle(
         M_ERR("Unable to open volume handle!");
         goto err_handle;
       }
+    CloseHandle(VolumeInfo->Handle);
 
     return ERROR_SUCCESS;
 
-    CloseHandle(VolumeInfo->Handle);
     err_handle:
 
     return rc;
@@ -307,7 +307,7 @@ DWORD M_NTFSSECT_API NtfsSectLoadXpFuncs(S_NTFSSECT_XPFUNCS * XpFuncs) {
 
     XpFuncs->Size = sizeof *XpFuncs;
 
-    XpFuncs->Kernel32 = LoadLibraryA("kernel32.dll");
+    XpFuncs->Kernel32 = LoadLibraryExA("kernel32.dll", NULL, LOAD_LIBRARY_SEARCH_SYSTEM32);
     rc = GetLastError();
     if (!XpFuncs->Kernel32) {
         M_ERR("KERNEL32.DLL not found!");

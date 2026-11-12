@@ -1,9 +1,11 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: 3.5\n"
+"Project-Id-Version: 4.14\n"
 "Report-Msgid-Bugs-To: pete@akeo.ie\n"
-"POT-Creation-Date: 2020-04-17 12:18+0100\n"
-"PO-Revision-Date: 2020-04-17 12:21+0100\n"
+"POT-Creation-Date: 2026-04-17 17:59+0300\n"
+"PO-Revision-Date: 2026-04-18 00:01+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: lt_LT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -11,9 +13,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Rufus-LanguageName: Lithuanian (Lietuvių)\n"
 "X-Rufus-LCID: 0x0427\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.9\n"
 
 #. • IDD_DIALOG → IDS_DRIVE_PROPERTIES_TXT
 msgid "Drive Properties"
@@ -25,7 +25,7 @@ msgstr "Įrenginys"
 
 #. • IDD_DIALOG → IDS_BOOT_SELECTION_TXT
 msgid "Boot selection"
-msgstr "Įkelties parinktis"
+msgstr "Įkrovos parinktis"
 
 #. • IDD_DIALOG → IDC_SELECT
 msgid "Select"
@@ -54,13 +54,12 @@ msgstr "Išvardinti USB kietuosius diskus"
 msgid "Add fixes for old BIOSes (extra partition, align, etc.)"
 msgstr "Pataisos seniems BIOS (papildomas skaidinys, ir kt.)"
 
-#. • IDD_DIALOG → IDC_RUFUS_MBR
+#. • IDD_DIALOG → IDC_UEFI_MEDIA_VALIDATION
 #.
-#. 'MBR': See http://en.wikipedia.org/wiki/Master_boot_record
-#. Rufus can install it's own custom MBR (the Rufus MBR), which also allows users to
-#. specify a custom disk ID for the BIOS. The tooltip for this control is MSG_167.
-msgid "Use Rufus MBR with BIOS ID"
-msgstr "Naudoti Rufus MBR su BIOS ID"
+#. It is acceptable to drop the "runtime" if you are running out of space
+#, fuzzy
+msgid "Enable runtime UEFI media validation"
+msgstr "Įgalinti vykdymo laiko UEFI laikmenos patvirtinimą"
 
 #. • IDD_DIALOG → IDS_FORMAT_OPTIONS_TXT
 msgid "Format Options"
@@ -310,7 +309,7 @@ msgstr ""
 
 #. • MSG_025
 #.
-#. *Short* version of the pentabyte size suffix
+#. *Short* version of the petabyte size suffix
 msgid "PB"
 msgstr ""
 
@@ -485,7 +484,7 @@ msgstr "Nepavyko atverti laikmenos. Ji gali būti naudojama kito proceso. Praša
 
 #. • MSG_068
 msgid "Could not partition drive."
-msgstr "Klaida skaidant diską."
+msgstr "Nepavyko išskaidyti disko."
 
 #. • MSG_069
 msgid "Could not copy files to target drive."
@@ -519,7 +518,7 @@ msgstr "Negalima prijungti tomo."
 
 #. • MSG_076
 msgid "Unable to patch/setup files for boot."
-msgstr "Negalima papildyti/paruošti failų įkelčiai."
+msgstr "Negalima papildyti/paruošti failų įkrovai."
 
 #. • MSG_077
 msgid "Unable to assign a drive letter."
@@ -553,7 +552,7 @@ msgstr "Nepalaikomas atvaizdas"
 
 #. • MSG_082
 msgid "This image is either non-bootable, or it uses a boot or compression method that is not supported by Rufus..."
-msgstr "Arba tai ne įkelties atvaizdas, arba jis naudoja įkelties ar glaudinimo metodą, kurio nepalaiko Rufus..."
+msgstr "Arba tai ne įkrovos atvaizdas, arba jis naudoja įkrovos ar glaudinimo metodą, kurio nepalaiko Rufus..."
 
 #. • MSG_083
 msgid "Replace %s?"
@@ -572,7 +571,7 @@ msgid ""
 "Note: The new file will be downloaded in the current directory and once a '%s' exists there, it will be reused automatically."
 msgstr ""
 "Atrodo, šis ISO atvaizdas naudoja pasenusią „%s“ versiją.\n"
-"Įkelties meniu dėl to gali būti vaizduojamas blogai.\n"
+"Įkrovos meniu dėl to gali būti vaizduojamas blogai.\n"
 "\n"
 "Galima atsisiųsti naujesnę Rufus versiją išspręsti problemai:\n"
 "- Pasirinkite 'Taip' norėdami prisijungti prie interneto ir atsisiųsti failą\n"
@@ -614,7 +613,7 @@ msgstr "Nepalaikomas ISO"
 
 #. • MSG_091
 msgid "When using UEFI Target Type, only EFI bootable ISO images are supported. Please select an EFI bootable ISO or set the Target Type to BIOS."
-msgstr "Naudojant UEFI paskirties tipą, tik EFI įkelties ISO atvaizdai yra palaikomi. Prašome pasirinkti EFI įkelties ISO arba pakeisti paskirties tipą į BIOS."
+msgstr "Naudojant UEFI paskirties tipą, tik EFI įkrovos ISO atvaizdai yra palaikomi. Prašome pasirinkti EFI įkrovos ISO arba pakeisti paskirties tipą į BIOS."
 
 #. • MSG_092
 msgid "Unsupported filesystem"
@@ -654,7 +653,7 @@ msgid ""
 "\n"
 "Note: The 'FIXED/REMOVABLE' attribute is a hardware property that can only be changed using custom tools from the drive manufacturer. However those tools are ALMOST NEVER provided to the public..."
 msgstr ""
-"SVARBU: Jūs bandote įdiegti 'Windows To Go', bet jūsų paskirties diskas neturi atributo ´FIKSUOTAS´. Dėl to sistema Windows greičiausiai pakibs įkelties metu, nes Microsoft nepritaikė jos veikti su diskais, turinčiais ´KEIČIAMAS´ atributą.\n"
+"SVARBU: Jūs bandote įdiegti 'Windows To Go', bet jūsų paskirties diskas neturi atributo ´FIKSUOTAS´. Dėl to sistema Windows greičiausiai pakibs įkrovos metu, nes Microsoft nepritaikė jos veikti su diskais, turinčiais ´KEIČIAMAS´ atributą.\n"
 "\n"
 "Ar vis tiek norite tęsti?\n"
 "\n"
@@ -666,7 +665,7 @@ msgstr "Failų sistemos apribojimas"
 
 #. • MSG_100
 msgid "This ISO image contains a file larger than 4 GB, which is more than the maximum size allowed for a FAT or FAT32 file system."
-msgstr "Šiame ISO atvaizde yra failas, didesnis negu 4 GB, tai daugiau negu maksimalus leistinas dydis FAT arba FAT32 failų sistemai."
+msgstr "Šiame ISO atvaizde yra failas, didesnis nei 4 GB, tai daugiau nei maksimalus leistinas FAT arba FAT32 failų sistemos dydis."
 
 #. • MSG_101
 msgid "Missing WIM support"
@@ -677,7 +676,7 @@ msgid ""
 "Your platform cannot extract files from WIM archives. WIM extraction is required to create EFI bootable Windows 7 and Windows Vista USB drives. You can fix that by installing a recent version of 7-Zip.\n"
 "Do you want to visit the 7-zip download page?"
 msgstr ""
-"Jūsų platforma negali išskleisti failų iš WIM archyvų. WIM išskleidimas būtinas norint sukurti EFI įkeliamus Windows 7 ir Windows Vista USB diskus. Jūs galite tai sutvarkyti įdiegdami dabartinę 7-Zip versiją.\n"
+"Jūsų platforma negali išskleisti failų iš WIM archyvų. WIM išskleidimas būtinas norint sukurti EFI įkraunamus Windows 7 ir Windows Vista USB diskus. Jūs galite tai sutvarkyti įdiegdami dabartinę 7-Zip versiją.\n"
 "Ar norite apsilankyti 7-zip atsisiuntimo puslapyje?"
 
 #. • MSG_103
@@ -848,7 +847,7 @@ msgstr "Be išlikimo"
 
 #. • MSG_125
 #.
-#. Tooltips used for the peristence size slider and edit control
+#. Tooltips used for the persistence size slider and edit control
 msgid "Set the size of the persistent partition for live USB media. Setting the size to 0 disables the persistent partition."
 msgstr "Nustatykite išliekamojo skaidinio dydį gyvai USB laikmenai. Nustačius 0 dydį, išliekamasis skaidinys išjungiamas."
 
@@ -869,19 +868,19 @@ msgid ""
 "You have just created a media that uses the UEFI:NTFS bootloader. Please remember that, to boot this media, YOU MUST DISABLE SECURE BOOT.\n"
 "For details on why this is necessary, see the 'More Information' button below."
 msgstr ""
-"Jūs ką tik sukūrėte laikmeną, kuri naudoja UEFI:NTFS įkėliklį. Atminkite, norėdami įkelti sistemą iš šios laikmenos, turite išjungti SECURE BOOT.\n"
+"Jūs ką tik sukūrėte laikmeną, kuri naudoja UEFI:NTFS įkėliklį. Atminkite, norėdami įkrovos sistemą iš šios laikmenos, turite išjungti SECURE BOOT.\n"
 "Išsamiau apie tai, kodėl tai būtina, žiūrėkite žemiau esančiame mygtuke \"Daugiau informacijos\"."
 
 #. • MSG_130
 msgid "Windows image selection"
-msgstr "\"Windows\" atvaizdo pasirinkimas"
+msgstr "Windows atvaizdo pasirinkimas"
 
 #. • MSG_131
 msgid ""
 "This ISO contains multiple Windows images.\n"
 "Please select the image you wish to use for this installation:"
 msgstr ""
-"Šiame ISO yra keli \"Windows\" atvaizdai.\n"
+"Šiame ISO yra keli Windows atvaizdai.\n"
 "Pasirinkite atvaizdą, kurį norite naudoti šiam diegimui:"
 
 #. • MSG_132
@@ -889,8 +888,9 @@ msgid "Another program or process is accessing this drive. Do you want to format
 msgstr "Kita programa arba procesas kreipiasi į šį diską. Ar vis tiek norite jį formatuoti?"
 
 #. • MSG_133
+#, fuzzy
 msgid ""
-"Rufus has detected that you are attempting to create a Windows To Go media based on a 1809 ISO.\n"
+"Rufus has detected that you are attempting to create a 'Windows To Go' media based on a 1809 ISO.\n"
 "\n"
 "Because of a *MICROSOFT BUG*, this media will crash during Windows boot (Blue Screen Of Death), unless you manually replace the file 'WppRecorder.sys' with a 1803 version.\n"
 "\n"
@@ -898,7 +898,7 @@ msgid ""
 msgstr ""
 "Rufus aptiko, kad jūs bandote sukurti Windows To Go laikmeną remiantis 1809 ISO.\n"
 "\n"
-"Dėl  *MICROSOFT klaidos*, ši laikmena užlūš įkeliant Windows (mėlynas mirties ekranas), nebent jūs rankiniu būdu pakeisite failą \"WppRecorder. sys\" į 1803 versiją.\n"
+"Dėl *MICROSOFT klaidos*, ši laikmena užlūš įkraunant Windows (mėlynas mirties ekranas), nebent jūs rankiniu būdu pakeisite failą \"WppRecorder. sys\" į 1803 versiją.\n"
 "\n"
 "Taip pat atkreipkite dėmesį, kad Rufus negali automatiškai pataisyti to už jus, nes \"WppRecorder. sys\" yra \"Microsoft\" autorių teisėmis apsaugotas failas, todėl mes negalime legaliai įterpti šio failo kopijos mūsų programoje..."
 
@@ -949,8 +949,8 @@ msgid "Download using a browser"
 msgstr "Atsisiųsti naudojant naršyklę"
 
 #. • MSG_144
-msgid "Temporarily banned by Microsoft for requesting too many downloads - Please try again later..."
-msgstr "Laikinai uždrausta Microsoft dėl per didelio atsisiuntimų skaičiaus - Bandykite vėliau..."
+msgid "Download of Windows ISOs is unavailable due to Microsoft having altered their website to prevent it."
+msgstr "Windows ISO atsisiuntimas nepasiekiamas, nes Microsoft pakeitė savo svetainę, kad to išvengtų."
 
 #. • MSG_145
 msgid "PowerShell 3.0 or later is required to run this script."
@@ -1032,7 +1032,7 @@ msgstr "Būdas, kuris bus naudojamas skaidiniams kurti"
 
 #. • MSG_164
 msgid "Method that will be used to make the drive bootable"
-msgstr "Būdas, kuris bus naudojamas padaryti diską įkeliamą"
+msgstr "Būdas, kuris bus naudojamas padaryti diską įkraunamą"
 
 #. • MSG_165
 msgid "Click to select or download an image..."
@@ -1043,16 +1043,9 @@ msgid "Check this box to allow the display of international labels and set a dev
 msgstr "Pažymėkite šį langelį, norėdami įgalinti tarptautinių žymių rodymą ir įrenginio piktogramos nustatymą (sukuria autorun.inf)"
 
 #. • MSG_167
-msgid "Install an MBR that allows boot selection and can masquerade the BIOS USB drive ID"
-msgstr "Įdiegia MBR, kuris įgalina įkelties pasirinkimą ir gali maskuoti BIOS USB disko ID"
-
-#. • MSG_168
-msgid ""
-"Try to masquerade first bootable USB drive (usually 0x80) as a different disk.\n"
-"This should only be necessary if you install Windows XP and have more than one disk."
-msgstr ""
-"Bandyti maskuoti pirmą įkeliamą USB diską (paprastai 0x80) kaip kitą diską.\n"
-"To turėtų prireikti tik jei diegsite Windows XP ir bus daugiau nei vienas diskas."
+#, fuzzy
+msgid "Install a UEFI bootloader, that will perform MD5Sum file validation of the media"
+msgstr "Įdiegia MBR, kuris įgalina įkrovos pasirinkimą ir gali maskuoti BIOS USB disko ID"
 
 #. • MSG_169
 msgid ""
@@ -1060,7 +1053,7 @@ msgid ""
 "This can improve boot detection for older BIOSes."
 msgstr ""
 "Sukurti papildomą slaptą skaidinį ir bandyti sulygiuoti skaidinių ribas.\n"
-"Tai gali pagerinti įkelties aptikimą su senais BIOSais."
+"Tai gali pagerinti įkrovos aptikimą su senais BIOSais."
 
 #. • MSG_170
 msgid "Enable the listing of USB Hard Drive enclosures. USE AT YOUR OWN RISKS!!!"
@@ -1143,11 +1136,11 @@ msgstr ""
 
 #. • MSG_187
 msgid "Invalid image for selected boot option"
-msgstr "Negaliojantis atvaizdas pasirinktai įkelties parinkčiai"
+msgstr "Negaliojantis atvaizdas pasirinktai įkrovos parinkčiai"
 
 #. • MSG_188
 msgid "The current image doesn't match the boot option selected. Please use a different image or choose a different boot option."
-msgstr "Dabartinis atvaizdas neatitinka pasirinktos įkelties parinkties. Prašome naudoti kitą atvaizdą arba rinktis kitą įkelties parinktį."
+msgstr "Dabartinis atvaizdas neatitinka pasirinktos įkrovos parinkties. Prašome naudoti kitą atvaizdą arba rinktis kitą įkrovos parinktį."
 
 #. • MSG_189
 msgid "This ISO image is not compatible with the selected filesystem"
@@ -1192,8 +1185,8 @@ msgid ""
 msgstr ""
 "SVARBU: ŠIS DISKAS NAUDOJA NESTANDARTINĮ SEKTORIAUS DYDĮ!\n"
 "\n"
-"Įprastiniai diskai naudoja 512 baitų sektoriaus dydį, bet šis diskas naudoja %d baitų. Daugeliu atveju tai reiškia, kad jūs NEGALĖSITE įkelti sistemos iš šio disko.\n"
-"Rufus gali mėginti sukurti įkelties diską, bet NĖRA GARANTIJŲ, kad jis veiks."
+"Įprastiniai diskai naudoja 512 baitų sektoriaus dydį, bet šis diskas naudoja %d baitų. Daugeliu atveju tai reiškia, kad jūs NEGALĖSITE įkrauti sistemos iš šio disko.\n"
+"Rufus gali mėginti sukurti įkrovos diską, bet NĖRA GARANTIJŲ, kad jis veiks."
 
 #. • MSG_197
 msgid "Nonstandard sector size detected"
@@ -1202,6 +1195,10 @@ msgstr "Aptiktas nestandartinis sektoriaus dydis"
 #. • MSG_198
 msgid "'Windows To Go' can only be installed on a GPT partitioned drive if it has the FIXED attribute set. The current drive was not detected as FIXED."
 msgstr "'Windows To Go' gali būti įdiegta tik į GPT skaidinių diską, jei jis turi įjungtą atributą 'FIKSUOTAS'. Pasirinktas diskas nebuvo aptiktas kaip FIKSUOTAS."
+
+#. • MSG_199
+msgid "This feature is not available on this platform."
+msgstr "Ši funkcija šioje platformoje nepasiekiama."
 
 #. • MSG_201
 msgid "Cancelling - Please wait..."
@@ -1309,8 +1306,8 @@ msgid "Formatting (%s) - estimated duration %d:%02d..."
 msgstr "Formatuojama (%s) - numatoma trukmė %d:%02d..."
 
 #. • MSG_221
-msgid "Setting Label (This may take a while)..."
-msgstr "Rašoma žymė (gali užtrukti)..."
+msgid "Setting label (%s)..."
+msgstr "Rašoma žymė (%s)..."
 
 #. • MSG_222
 #.
@@ -1332,7 +1329,7 @@ msgstr "Užsakoma disko prieiga..."
 
 #. • MSG_226
 msgid "Analyzing existing boot records..."
-msgstr "Tiriami esami įkelties įrašai..."
+msgstr "Tiriami esami įkrovos įrašai..."
 
 #. • MSG_227
 msgid "Closing existing volume..."
@@ -1340,11 +1337,11 @@ msgstr "Uždaromas esamas tomas..."
 
 #. • MSG_228
 msgid "Writing Master Boot Record..."
-msgstr "Rašomas valdantysis įkelties įrašas (MBR)..."
+msgstr "Rašomas pagrindinis įkrovos įrašas (MBR)..."
 
 #. • MSG_229
 msgid "Writing Partition Boot Record..."
-msgstr "Rašomas skaidinio įkelties įrašas..."
+msgstr "Rašomas skaidinio įkrovos įrašas..."
 
 #. • MSG_230
 msgid "Copying DOS files..."
@@ -1355,8 +1352,8 @@ msgid "Copying ISO files: %s"
 msgstr "Kopijuojami ISO failai: %s"
 
 #. • MSG_232
-msgid "Win7 EFI boot setup (This may take a while)..."
-msgstr "Win7 EFI įkelties sąranka (gali užtrukti)..."
+msgid "Win7 EFI boot setup (%s)..."
+msgstr "Win7 EFI įkrovos sąranka (%s)..."
 
 #. • MSG_233
 msgid "Finalizing, please wait..."
@@ -1391,8 +1388,8 @@ msgid "Partitioning (%s)..."
 msgstr "Skaidoma (%s)..."
 
 #. • MSG_239
-msgid "Deleting partitions..."
-msgstr "Trinami skaidiniai..."
+msgid "Deleting partitions (%s)..."
+msgstr "Naikinami skaidiniai (%s)..."
 
 #. • MSG_240
 #.
@@ -1545,8 +1542,8 @@ msgid "Change the application language"
 msgstr "Keisti programos kalbą"
 
 #. • MSG_274
-msgid "ISOHybrid image detected"
-msgstr "Aptiktas ISOHybrid atvaizdas"
+msgid "%s image detected"
+msgstr "Aptiktas %s atvaizdas"
 
 #. • MSG_275
 #.
@@ -1560,7 +1557,7 @@ msgid ""
 msgstr ""
 "Jūsų pasirinktas atvaizdas yra „ISOHybrid“ atvaizdas. Tai reiškia, kad jis gali būti įrašytas %s (failų kopijavimo) režimu arba %s (disko atvaizdo) režimu.\n"
 "Rufus rekomenduoja naudoti režimą %s tam, kad visada turėtumėte visišką prieigą prie disko po įrašymo.\n"
-"Tačiau, jei susiduriate su problemomis įkelties metu, galite pabandyti įrašyti šį atvaizdą iš naujo %s režimu.\n"
+"Tačiau, jei susiduriate su problemomis įkrovos metu, galite pabandyti įrašyti šį atvaizdą iš naujo %s režimu.\n"
 "\n"
 "Prašome pasirinkti režimą, kuriuo norite įrašyti šį atvaizdą:"
 
@@ -1582,7 +1579,7 @@ msgstr "Konfliktuojančių procesų tikrinimas..."
 
 #. • MSG_279
 msgid "Non bootable"
-msgstr "Neįkeliamas"
+msgstr "Neįkraunamas"
 
 #. • MSG_280
 msgid "Disk or ISO image"
@@ -1647,8 +1644,12 @@ msgid "Unsupported Windows version"
 msgstr "Nepalaikoma Windows versija"
 
 #. • MSG_294
-msgid "This version of Windows is no longer supported by Rufus."
-msgstr "Šios Windows versijos Rufus nebepalaiko."
+msgid ""
+"This version of Windows is no longer supported by Rufus.\n"
+"The last version of Rufus compatible with this platform is v%d.%d."
+msgstr ""
+"Šios Windows versijos Rufus nebepalaiko.\n"
+"Paskutinė Rufus versija, suderinama su šia platforma, yra v%d.%d."
 
 #. • MSG_295
 msgid "Warning: Unofficial version"
@@ -1682,7 +1683,6 @@ msgstr ""
 "\n"
 "Beje, jūs galite apskaičiuoti MD5 arba SHA per Rufus, paspaudę."
 
-# ´ mygtuką."
 #. • MSG_299
 msgid "Timestamp validation error"
 msgstr "Laiko žymos tikrinimo klaida"
@@ -1714,7 +1714,7 @@ msgid "Create a disk image of the selected device"
 msgstr "Kurti pasirinkto įrenginio disko atvaizdą"
 
 #. • MSG_305
-msgid "Use this option to indicate whether you want to use this device to install Windows on another disk, or if you want to run Windows directly from this drive (Windows To Go)."
+msgid "Use this option to indicate if you plan to install Windows to a different disk, or if you want to run Windows directly from this drive (Windows To Go)."
 msgstr "Šią parinktį naudokite norėdami nurodyti ar naudosite šį įrenginį įdiegti Windows į kitą diską, ar norėsite vykdyti Windows tiesiogiai iš šio disko (Windows To Go)."
 
 #. • MSG_306
@@ -1723,3 +1723,446 @@ msgstr "Šią parinktį naudokite norėdami nurodyti ar naudosite šį įrengin�
 #. It's the same as MSG_286 but with a process that *may* be faster, hence the name.
 msgid "Fast-zeroing drive: %s"
 msgstr "Greitasis disko nulinimas: %s"
+
+#. • MSG_307
+msgid "this may take a while"
+msgstr "tai gali užtrukti"
+
+#. • MSG_308
+msgid "VHD detection"
+msgstr "VHD aptikimas"
+
+#. • MSG_309
+msgid "Compressed archive"
+msgstr "Suglaudintas archyvas"
+
+#. • MSG_310
+msgid ""
+"The ISO you have selected uses UEFI and is small enough to be written as an EFI System Partition (ESP). Writing to an ESP, instead of writing to a generic data partition occupying the whole disk, can be preferable for some types of installations.\n"
+"\n"
+"Please select the mode that you want to use to write this image:"
+msgstr ""
+"Jūsų pasirinktas ISO naudoja UEFI ir yra pakankamai mažas, kad būtų įrašytas kaip ESI sistemos skaidinys (ESP). Rašymas į ESP gali būti tinkamesnis kai kuriems diegimo būdams negu rašymas į paprastą duomenų skaidinį užimantį visą diską.\n"
+"\n"
+"Pasirinkite būdą kuriuo norite įrašyti šį atvaizdą:"
+
+#. • MSG_311
+msgid "Use %s (in the main application window) to enable."
+msgstr "Naudokite %s (pagrindiniame programos lange), kad įjungtumėte."
+
+#. • MSG_312
+msgid "Extra hashes (SHA512)"
+msgstr "Papildomos maišos (SHA512)"
+
+#. • MSG_313
+msgid "Save to VHD"
+msgstr "Išsaugoti į VHD"
+
+#. • MSG_314
+msgid "Compute image checksums"
+msgstr "Skaičiuoti atvaizdo kontrolines sumas"
+
+#. • MSG_315
+msgid "Multiple buttons"
+msgstr "Keletas mygtukų"
+
+#. • MSG_316
+msgid "Number of passes"
+msgstr "Bandymų skaičius"
+
+#. • MSG_317
+msgid "Disk ID"
+msgstr "Disko ID"
+
+#. • MSG_318
+msgid "Default thread priority: %d"
+msgstr "Numatytasis gijos pirmumas"
+
+#. • MSG_319
+msgid "Ignore Boot Marker"
+msgstr "Nepasyti įkrovos žymės"
+
+#. • MSG_320
+msgid "Refreshing partition layout (%s)..."
+msgstr "Atnaujinamas skaidinių išdėstymas (%s)..."
+
+#. • MSG_321
+msgid ""
+"The image you have selected is an ISOHybrid, but its creators have not made it compatible with ISO/File copy mode.\n"
+"As a result, DD image writing mode will be enforced."
+msgstr ""
+"Jūsų pasirinktas atvaizdas yra \"ISOHybrid\" atvaizdas, tačiau jo kūrėjai nepadarė jo suderinamu su ISO/failų kopijavimo režimu.\n"
+"Dėl to bus įgalintas DD atvaizdo įrašymo režimas."
+
+#. • MSG_322
+msgid "Unable to open or read '%s'"
+msgstr "Nepavyksta atidaryti arba perskaityti \"%s\""
+
+#. • MSG_323
+#, fuzzy
+msgid "Apply SkuSiPolicy.p7b on installation (See KB5042562)"
+msgstr "Diegimo metu pritaikykite SkuSiPolicy.p7b (žr. KB5042562)"
+
+#. • MSG_324
+#, fuzzy
+msgid "QoL improvements (Don't force Copilot, OneDrive, Outlook, Fast Startup, etc.)"
+msgstr "QoL patobulinimai (Neverskite Copilot, OneDrive, Outlook, Greitas Paleidimas, etc.)"
+
+#. • MSG_325
+msgid "Applying Windows customization: %s"
+msgstr "Windows tinkinimo taikymas: %s"
+
+#. • MSG_326
+msgid "Applying user options..."
+msgstr "Vartotojo parinkčių taikymas..."
+
+#. • MSG_327
+msgid "Windows User Experience"
+msgstr "Windows vartotojo patirtis"
+
+#. • MSG_328
+msgid "Customize Windows installation?"
+msgstr "Tinkinti Windows diegimą?"
+
+#. • MSG_329
+msgid "Remove requirement for 4GB+ RAM, Secure Boot and TPM 2.0"
+msgstr "Pašalinkite 4 GB + RAM, saugaus įkrovimo ir TPM 2.0 reikalavimus"
+
+#. • MSG_330
+msgid "Remove requirement for an online Microsoft account"
+msgstr "Pašalinkite internetinės Microsoft paskyros reikalavimą"
+
+#. • MSG_331
+msgid "Disable data collection (Skip privacy questions)"
+msgstr "Išjungti duomenų rinkimą (praleisti klausimus apie privatumą)"
+
+#. • MSG_332
+msgid "Prevent Windows To Go from accessing internal disks"
+msgstr "Neleiskite Windows To Go pasiekti vidinių diskų"
+
+#. • MSG_333
+msgid "Create a local account with username:"
+msgstr "Sukurkite vietinę paskyrą naudodami vartotojo vardą:"
+
+#. • MSG_334
+msgid "Set regional options to the same values as this user's"
+msgstr "Regiono parinkčių nustatymas į tas pačias reikšmes kaip ir šio vartotojo"
+
+#. • MSG_335
+msgid "Disable BitLocker automatic device encryption"
+msgstr "BitLocker automatinio įrenginių šifravimo išjungimas"
+
+#. • MSG_336
+msgid "Persistent log"
+msgstr "Nuolatinis žurnalas"
+
+#. • MSG_337
+#, fuzzy
+msgid ""
+"An additional file ('%s') must be downloaded from Microsoft to use this feature:\n"
+"- Select 'Yes' to connect to the Internet and download it\n"
+"- Select 'No' to cancel the operation\n"
+"\n"
+"Note: The file will be downloaded in the application's directory and will be reused automatically if present."
+msgstr ""
+"Papildomas failas ('%s') turi būti atsisiųstas iš Microsoft, kad naudotis šią funkcija:\n"
+"- Pasirinkite 'Taip' kad prisijungtumėte prie Interneto ir atsisiųstumėte jį\n"
+"- Pasirinkite 'Ne' kad atšaukti operacija\n"
+"\n"
+"Pastaba: Failas bus atsisiųstas į programos katalogą ir, jei ten jau yra, bus automatiškai panaudotas."
+
+#. • MSG_338
+#, fuzzy
+msgid "Revoked UEFI bootloader detected"
+msgstr "Aptikta panaikinta UEFI įkrovos tvarkyklė"
+
+#. • MSG_339
+#, fuzzy
+msgid ""
+"Rufus detected that the ISO you have selected contains a UEFI bootloader that has been revoked and that will produce %s, when Secure Boot is enabled on a fully up to date UEFI system.\n"
+"\n"
+"- If you obtained this ISO image from a non reputable source, you should consider the possibility that it might contain UEFI malware and avoid booting from it.\n"
+"- If you obtained it from a trusted source, you should try to locate a more up to date version, that will not produce this warning."
+msgstr ""
+"Rufus aptiko, kad šis pasirinktas ISO tūri UEFI įkrovos programa kuris buvo panaikintas ir kuris kurs %s, kai visiškai atnaujintoje EUFI sistemoje yra įjungtas saugus įkrovimas.\n"
+"\n"
+"- Jei ši ISO atvaizdą gavote iš nepatikimo šaltinio, turėtumėte apsvarstyti galimybę, kad jame gali būti UEFI kenkėjiška programa, ir vengti paleisti sistemą iš jos.\n"
+"- Jei gavote iš patikimo šaltinio, turėtumėte pabandyti rasti naujesnę versiją, kuri nesukels šio įspėjimo."
+
+#. • MSG_340
+#, fuzzy
+msgid "a \"Security Violation\" screen"
+msgstr "ekranas \"Saugumo pažeidimas\""
+
+#. • MSG_341
+#, fuzzy
+msgid "a Windows Recovery Screen (BSOD) with '%s'"
+msgstr "Windows atkūrimo ekranas (BSOD) su pranešimu '%s'"
+
+#. • MSG_342
+#, fuzzy
+msgid "Compressed VHDX Image"
+msgstr "Suspaustas VHDX Atvaizdas"
+
+#. • MSG_343
+#, fuzzy
+msgid "Uncompressed VHD Image"
+msgstr "Nesuspaustas VHD Atvaizdas"
+
+#. • MSG_344
+#, fuzzy
+msgid "Full Flash Update Image"
+msgstr "Pilnas Flash Atnaujinimo Atvaizdas"
+
+#. • MSG_345
+#, fuzzy
+msgid ""
+"Some additional data must be downloaded from Microsoft to use this functionality:\n"
+"- Select 'Yes' to connect to the Internet and download it\n"
+"- Select 'No' to cancel the operation"
+msgstr ""
+"Reikia atsisiųsti papildomų duomenų iš Microsoft, kad naudotis šią funkciją:\n"
+"- Pasirinkite 'Taip' kad prisijungtumėte prie Interneto ir atsisiųstumėte jį\n"
+"- Pasirinkite 'Ne' kad atšaukti operacija"
+
+#. • MSG_346
+#, fuzzy
+msgid "Restrict Windows to S-Mode (INCOMPATIBLE with online account bypass)"
+msgstr "Apriboti Windows iki S-režimo (NESUDERINAMA su internetinės paskyros apėjimu)"
+
+#. • MSG_347
+#, fuzzy
+msgid "Expert Mode"
+msgstr "Eksperto režimas"
+
+#. • MSG_348
+#, fuzzy
+msgid "Extracting archive files: %s"
+msgstr "Išskleiskite failus iš čia: %s"
+
+#. • MSG_349
+#, fuzzy
+msgid "Use Rufus MBR"
+msgstr "Naudokit Rufus MBR"
+
+#. • MSG_350
+#, fuzzy
+msgid "Use 'Windows CA 2023' signed bootloaders (Requires a compatible target PC)"
+msgstr "Naudokite 'Windows CA 2023' pasirašytus įkrovos tvarkyklės (Reikalingas suderinamas tikslinis kompiuteris)"
+
+#. • MSG_351
+#, fuzzy
+msgid "Checking for UEFI bootloader revocation..."
+msgstr "Tikrinama, ar nėra UEFI įkrovos tvarkyklės atšaukimo..."
+
+#. • MSG_352
+#, fuzzy
+msgid "Checking for UEFI DBX updates..."
+msgstr "Ieškoma UEFI DBX atnaujinimų..."
+
+#. • MSG_353
+#, fuzzy
+msgid "DBX update available"
+msgstr "DBX atnaujinimas pasiekimas"
+
+#. • MSG_354
+#, fuzzy
+msgid ""
+"Rufus has found an updated version of the DBX files used to perform UEFI Secure Boot revocation checks. Do you want to download this update?\n"
+"- Select 'Yes' to connect to the Internet and download this content\n"
+"- Select 'No' to cancel the operation\n"
+"\n"
+"Note: The files will be downloaded in the application's directory and will be reused automatically if present."
+msgstr ""
+"Rufus rado atnaujintą DBX failų versija, naudojamų UEFI saugaus įkrovimo atšaukimo patikrinimams atlikti. Ar norite atsisiųsti šį atnaujinimą?\n"
+"- Pasirinkite 'Taip' kad prisijungtumėte prie Interneto ir atsisiųstumėte jį\n"
+"- Pasirinkite 'Ne' kad atšaukti operacija\n"
+"\n"
+"Pastaba: Failas bus atsisiųstas į programos katalogą ir, jei ten jau yra, bus automatiškai panaudotas."
+
+#. • MSG_355
+#, fuzzy
+msgid "⚠SILENTLY⚠ erase disk and install:"
+msgstr "⚠TYLIAI⚠ ištrinti diską ir įdiegti:"
+
+#. • MSG_356
+#, fuzzy
+msgid ""
+"You have selected to use the \"silent\" Windows installation option.\n"
+"\n"
+"This is an advanced option, reserved for people who want to create media that does not prompt the user during Windows installation and therefore UNCONDITIONALLY ERASES the first detected disk on the target system. If you are not careful, using this option can result in IRREVERSIBLE DATA LOSS!\n"
+"\n"
+"If this is not what you want, please select 'No' to go back and uncheck the option.\n"
+"Otherwise, if you select 'Yes', you agree that the whole responsibility for any data loss will be entirely with YOU."
+msgstr ""
+"Jūs pasirinkote naudotis \"tylioji\" Windows diegimo parinkti.\n"
+"\n"
+"Tai išplėstinė parinktis, skirta žmonėms, norintiems sukurti laikmeną, kuri neragina vartotojo diegiant „Windows“ ir todėl BE SĄLYGŲ IŠTRINA pirmąjį aptiktą diską tikslinėje sistemoje. Jei nebūsite atsargūs, naudodami šią parinktį galite NEATGRĄŽINAMAI PRARASTI DUOMENIS!\n"
+"\n"
+"Jei to nenorite, pasirinkite 'Ne', kad grįžtumėte ir panaikintumėte parinkties žymėjimą.\n"
+"Priešingu atveju, jei pasirinksite 'Taip', sutinkate, kad visa atsakomybė už bet kokį duomenų praradimą teks JUMS."
+
+#. • MSG_358
+#, fuzzy
+msgid "Unsupported image location"
+msgstr "Nepalaikoma atvaizdo vieta"
+
+#. • MSG_359
+#, fuzzy
+msgid ""
+"You cannot use an image that is located on the target drive, since that drive is going to be completely erased. It's the same thing as trying to saw the branch you are sitting on!\n"
+"\n"
+"Please move the image to a different location and try again."
+msgstr ""
+"Negalite naudoti atvaizdo, esančio paskirties diske, nes tas diskas bus visiškai ištrintas. Tai tas pats, kas bandyti pjauti šaką, ant kurios sėdite!\n"
+"\n"
+"Perkelkite atvaizdą į kitą vietą ir bandykite dar kartą."
+
+#. • MSG_360
+#, fuzzy
+msgid "It is safe to leave this option enabled even if you have a TPM or more RAM, as this option only bypasses the setup requirements and does not actually prevent Windows from using all the hardware available."
+msgstr "Šią parinktį galima palikti įjungtą, net jei turite TPM ar daugiau RAM, nes ši parinktis tik apeina sąrankos reikalavimus ir iš tikrųjų netrukdo „Windows“ naudoti visos turimos aparatinės įrangos."
+
+#. • MSG_361
+#, fuzzy
+msgid "For this option to work, network/Internet MUST be disconnected during installation!"
+msgstr "Kad ši parinktis veiktų, diegimo metu BŪTINA atjungti tinklą/Internetą!"
+
+#. • MSG_362
+#, fuzzy
+msgid "Automatically answer 'no' to the Windows setup questions relating to the sharing of data with Microsoft, instead of prompting the user."
+msgstr "Automatiškai atsakyti 'Ne' į Windows sąrankos klausimus, susijusius su duomenų bendrinimu su Microsoft, užuot raginus vartotoją tai padaryti."
+
+#. • MSG_363
+#, fuzzy
+msgid "You should leave this option enabled, unless you are okay with 'Windows To Go' accessing internal disks and silently performing irreversible file system upgrades."
+msgstr "Šią parinktį turėtumėte palikti įjungtą, nebent sutinkate, kad 'Windows To Go' pasiektų vidinius diskus ir tyliai atliktų nepakeičiama failų sistemos atnaujinimą."
+
+#. • MSG_364
+#, fuzzy
+msgid "Automatically create a local account with the specified user name, using an empty password that will need to be changed on next logon."
+msgstr "Automatiškai sukurti vietinę paskyrą su nurodytu vartotojo vardu, naudojant tuščią slaptažodį, kurį reikės pakeisti kito prisijungimo metu."
+
+#. • MSG_365
+#, fuzzy
+msgid "Duplicate the regional settings from this PC (keyboard, timezone, currency), instead of prompting the user."
+msgstr "Nukopijuokite regioninius nustatymus iš šio kompiuterio (klaviatūrą, laiko juostą, valiutą), užuot raginę vartotoją juos pakeisti."
+
+#. • MSG_366
+#, fuzzy
+msgid "Don't encrypt the system disk, unless explicitly requested by the user."
+msgstr "Nešifruokite sistemos disko, nebent to aiškiai paprašytų vartotojas."
+
+#. • MSG_367
+#, fuzzy
+msgid "Use this option only if you know what S-Mode is and understand that your system may be locked into S-Mode even after you completely erase and reinstall Windows."
+msgstr "Šią parinktį naudokite tik tuo atveju, jei žinote, kas yra S-režimas, ir suprantate, kad jūsų sistema gali būti užrakinta S-režime net ir visiškai ištrynus ir iš naujo įdiegus 'Windows'."
+
+#. • MSG_368
+#, fuzzy
+msgid "Use this option if the system you plan to install Windows on is using fully up-to-date Secure Boot certificates. If needed, you can look into using 'Mosby' to update your system."
+msgstr "Naudokite šią parinktį, jei sistema, kurioje planuojate įdiegti Windows, naudoja visiškai atnaujintus „Saugaus Įkrovimo“ sertifikatus. Jei reikia, galite apsvarstyti galimybę atnaujinti sistemą naudodami 'Mosby'."
+
+#. • MSG_369
+#, fuzzy
+msgid "Use this option if you want to revoke additional potentially unsafe Windows bootloaders, but with the potential of also preventing standard Windows media from booting."
+msgstr "Naudokite šią parinktį, jei norite atšaukti papildomus potencialiai nesaugius Windows įkrovos tvarkykles, tačiau taip pat galite neleisti paleisti standartinės Windows laikmenos."
+
+#. • MSG_370
+#, fuzzy
+msgid "\"Quality of Life\" enhancements: Disable most of the unwanted features Microsoft is trying to force onto end users."
+msgstr "\"Quality of Life\" patobulinimai: Išjunkite daugumą nepageidaujamų funkcijų, kurias Microsoft bando primesti galutiniams vartotojams."
+
+#. • MSG_371
+#, fuzzy
+msgid "If you use this option, please make sure to disconnect every disk from the target PC, except the one you want to install Windows on, as well as not leave the media plugged into any PC you don't want to erase."
+msgstr "Jei naudojate šią parinktį, būtinai atjunkite visus diskus nuo tikslinio kompiuterio, išskyrus tą, kuriame norite įdiegti Windows, ir nepalikite laikmenos prijungtos prie kompiuterio, kurio nenorite ištrinti."
+
+#. • MSG_900
+#.
+#. The following messages are for the Windows Store listing only and are not used by the application
+msgid "Rufus is a utility that helps format and create bootable USB flash drives, such as USB keys/pendrives, memory sticks, etc."
+msgstr "Rufus programa leidžia suženklinti ir sukurti sistemų paleidimo laikmenas, kaip pvz. USB atmintukus, atminties korteles ir pan."
+
+#. • MSG_901
+msgid "Official site: %s"
+msgstr "Oficiali svetainė: %s"
+
+#. • MSG_902
+msgid "Source Code: %s"
+msgstr "Šaltinio kodas: %s"
+
+#. • MSG_903
+msgid "ChangeLog: %s"
+msgstr "Pakeitimų žurnalas: %s"
+
+#. • MSG_904
+#.
+#. The gnu.org website has many translations of the GPL (such as https://www.gnu.org/licenses/gpl-3.0.zh-cn.html, https://www.gnu.org/licenses/gpl-3.0.fr.html)
+#. Please make sure you try to locate the relevant https://www.gnu.org/licenses/gpl-3.0.<LANG-ID>.html for your language and use it here.
+msgid ""
+"This application is licensed under the terms of the GNU Public License (GPL) version 3.\n"
+"See https://www.gnu.org/licenses/gpl-3.0.en.html for details."
+msgstr ""
+"Ši programa yra licencijuota pagal GNU viešosios licencijos (GPL) 3 versijos sąlygas.\n"
+"Daugiau informacijos rasite https://www.gnu.org/licenses/gpl-3.0.html."
+
+#. • MSG_905
+#.
+#. Keyword for "boot" will be used for search in the Windows Store
+msgid "Boot"
+msgstr "Batas"
+
+#. • MSG_910
+#.
+#. This and subsequent messages will be listed in the 'Features' section of the Windows Store page
+msgid "Format USB, flash card and virtual drives to FAT/FAT32/NTFS/UDF/exFAT/ReFS/ext2/ext3"
+msgstr "Suformatuokite USB, flash kortelę ir virtualius diskus į FAT32/NTFS/UDF/exFAT/ReFS/ext2/ext3"
+
+#. • MSG_911
+msgid "Create FreeDOS bootable USB drives"
+msgstr "Sukurkite FreeDOS įkrovos USB diskus"
+
+#. • MSG_912
+msgid "Create bootable drives from bootable ISOs (Windows, Linux, etc.)"
+msgstr "Sukurkite įkrovos diskus iš įkrovos ISO (Windows, Linux ir kt.)"
+
+#. • MSG_913
+msgid "Create bootable drives from bootable disk images, including compressed ones"
+msgstr "Sukurkite įkrovos diskus iš įkrovos disko vaizdų, įskaitant suspaustus"
+
+#. • MSG_914
+msgid "Create BIOS or UEFI bootable drives, including UEFI bootable NTFS"
+msgstr "Sukurkite BIOS arba UEFI įkrovos diskus, įskaitant UEFI įkrovos NTFS"
+
+#. • MSG_915
+msgid "Create 'Windows To Go' drives"
+msgstr "Sukurkite \"Windows To Go\" diskus"
+
+#. • MSG_916
+msgid "Create Windows 11 installation drives for PCs that don't have TPM or Secure Boot"
+msgstr "Sukurkite Windows 11 diegimo diskus kompiuteriams, kuriuose nėra TPM arba saugaus įkrovimo"
+
+#. • MSG_917
+msgid "Create persistent Linux partitions"
+msgstr "Sukurkite nuolatinius Linux skaidinius"
+
+#. • MSG_918
+msgid "Create VHD/DD images of the selected drive"
+msgstr "Sukurkite pasirinkto disko VHD / DD vaizdus"
+
+#. • MSG_919
+msgid "Compute MD5, SHA-1, SHA-256 and SHA-512 checksums of the selected image"
+msgstr "Apskaičiuokite pasirinkto vaizdo MD5, SHA-1, SHA-256 ir SHA-512 kontrolines sumas"
+
+#. • MSG_920
+msgid "Perform bad blocks checks, including detection of \"fake\" flash drives"
+msgstr "Atlikite blogų blokų patikrinimus, įskaitant \"netikrų\" flash diskų aptikimą"
+
+#. • MSG_921
+msgid "Download official Microsoft Windows retail ISOs"
+msgstr "Atsisiųskite oficialius Microsoft Windows mažmeninės prekybos ISO"
+
+#. • MSG_922
+msgid "Download UEFI Shell ISOs"
+msgstr "Atsisiųskite UEFI Shell ISO"

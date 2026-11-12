@@ -1,7 +1,7 @@
 /*
  * Rufus: The Reliable USB Formatting Utility
  * Drive access function calls
- * Copyright © 2011-2020 Pete Batard <pete@akeo.ie>
+ * Copyright © 2011-2025 Pete Batard <pete@akeo.ie>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,11 +36,13 @@
 #define XP_ESP                              0x02
 #define XP_UEFI_NTFS                        0x04
 #define XP_COMPAT                           0x08
-#define XP_CASPER                           0x10
+#define XP_PERSISTENCE                      0x10
 
 #define PI_MAIN                             0
 #define PI_ESP                              1
 #define PI_CASPER                           2
+#define PI_UEFI_NTFS                        3
+#define PI_MAX                              4
 
 // The following should match VDS_FSOF_FLAGS as much as possible
 #define FP_FORCE                            0x00000001
@@ -50,26 +52,14 @@
 #define FP_LARGE_FAT32                      0x00010000
 #define FP_NO_BOOT                          0x00020000
 #define FP_CREATE_PERSISTENCE_CONF          0x00040000
+#define FP_NO_PROGRESS                      0x00080000
 
 #define FILE_FLOPPY_DISKETTE                0x00000004
 
-#define VDS_SET_ERROR(hr) do { if (hr == S_FALSE) hr = ERROR_SEVERITY_ERROR|FAC(FACILITY_STORAGE)|ERROR_GEN_FAILURE; FormatStatus = hr; SetLastError(hr); } while(0)
+#define VDS_RESCAN_REFRESH                  0x00000001
+#define VDS_RESCAN_REENUMERATE              0x00000002
 
-#if !defined(__MINGW32__)
-typedef enum _FSINFOCLASS {
-	FileFsVolumeInformation = 1,
-	FileFsLabelInformation,
-	FileFsSizeInformation,
-	FileFsDeviceInformation,
-	FileFsAttributeInformation,
-	FileFsControlInformation,
-	FileFsFullSizeInformation,
-	FileFsObjectIdInformation,
-	FileFsDriverPathInformation,
-	FileFsVolumeFlagsInformation,
-	FileFsMaximumInformation
-} FS_INFORMATION_CLASS, *PFS_INFORMATION_CLASS;
-#endif
+#define VDS_SET_ERROR(hr) do { if (hr != S_OK) { SetLastError((DWORD)hr); ErrorStatus = RUFUS_ERROR(ERROR_GEN_FAILURE); } } while(0)
 
 /* We need a redef of these MS structure */
 typedef struct {
@@ -90,7 +80,12 @@ typedef struct _FILE_FS_DEVICE_INFORMATION {
 	ULONG Characteristics;
 } FILE_FS_DEVICE_INFORMATION, *PFILE_FS_DEVICE_INFORMATION;
 #else
-/* MinGW is currently missing all the VDS COM stuff */
+/*
+ * MinGW is currently missing most of the VDS COM stuff.
+ * Oh, and MinGW's vds.h is screwed up unless you define the following:
+ */
+#define VDS_LUN_INFORMATION void
+#define __vdslun_h__
 #include <vds.h>
 typedef interface IVdsServiceLoader IVdsServiceLoader;
 typedef interface IVdsService IVdsService;
@@ -296,12 +291,14 @@ interface IVdsAsync {
 #define IVdsService_WaitForServiceReady(This) ((This)->lpVtbl->WaitForServiceReady(This))
 #define IVdsService_CleanupObsoleteMountPoints(This) ((This)->lpVtbl->CleanupObsoleteMountPoints(This))
 #define IVdsService_Refresh(This) ((This)->lpVtbl->Refresh(This))
-#define IVdsService_Reenumerate(This) ((This)->lpVtbl->Reenumerate(This)) 
+#define IVdsService_Reenumerate(This) ((This)->lpVtbl->Reenumerate(This))
+#define IVdsService_Release(This) (This)->lpVtbl->Release(This)
 #define IVdsSwProvider_QueryInterface(This, riid, ppvObject) (This)->lpVtbl->QueryInterface(This, riid, ppvObject)
 #define IVdsProvider_Release(This) (This)->lpVtbl->Release(This)
 #define IVdsSwProvider_QueryPacks(This, ppEnum) (This)->lpVtbl->QueryPacks(This, ppEnum)
 #define IVdsSwProvider_Release(This) (This)->lpVtbl->Release(This)
 #define IVdsPack_QueryDisks(This, ppEnum) (This)->lpVtbl->QueryDisks(This, ppEnum)
+#define IVdsPack_Release(This) (This)->lpVtbl->Release(This)
 #define IVdsDisk_GetProperties(This, pDiskProperties) (This)->lpVtbl->GetProperties(This, pDiskProperties)
 #define IVdsDisk_Release(This) (This)->lpVtbl->Release(This)
 #define IVdsDisk_QueryInterface(This, riid, ppvObject) (This)->lpVtbl->QueryInterface(This, riid, ppvObject)
@@ -310,6 +307,7 @@ interface IVdsAsync {
 #define IVdsAdvancedDisk_Clean(This, bForce, bForceOEM, bFullClean, ppAsync) (This)->lpVtbl->Clean(This, bForce, bForceOEM, bFullClean, ppAsync)
 #define IVdsAdvancedDisk_Release(This) (This)->lpVtbl->Release(This)
 #define IEnumVdsObject_Next(This, celt, ppObjectArray, pcFetched) (This)->lpVtbl->Next(This, celt, ppObjectArray, pcFetched)
+#define IEnumVdsObject_Release(This) (This)->lpVtbl->Release(This)
 #define IVdsPack_QueryVolumes(This, ppEnum) (This)->lpVtbl->QueryVolumes(This, ppEnum)
 #define IVdsVolume_QueryInterface(This, riid, ppvObject) (This)->lpVtbl->QueryInterface(This, riid, ppvObject)
 #define IVdsVolume_Release(This) (This)->lpVtbl->Release(This)
@@ -335,8 +333,7 @@ typedef struct _DRIVE_LAYOUT_INFORMATION_EX4 {
 } DRIVE_LAYOUT_INFORMATION_EX4, *PDRIVE_LAYOUT_INFORMATION_EX4;
 
 static __inline BOOL UnlockDrive(HANDLE hDrive) {
-	DWORD size;
-	return DeviceIoControl(hDrive, FSCTL_UNLOCK_VOLUME, NULL, 0, NULL, 0, &size, NULL);
+	return DeviceIoControl(hDrive, FSCTL_UNLOCK_VOLUME, NULL, 0, NULL, 0, NULL, NULL);
 }
 #define safe_unlockclose(h) do {if ((h != INVALID_HANDLE_VALUE) && (h != NULL)) {UnlockDrive(h); CloseHandle(h); h = INVALID_HANDLE_VALUE;}} while(0)
 
@@ -350,8 +347,11 @@ typedef struct {
 	MEDIA_TYPE MediaType;
 	int PartitionStyle;
 	int nPartitions;	// number of partitions we actually care about
-	uint64_t PartitionOffset[MAX_PARTITIONS];
-	uint64_t PartitionSize[MAX_PARTITIONS];
+	struct {
+		wchar_t Name[36];
+		uint64_t Offset;
+		uint64_t Size;
+	} Partition[MAX_PARTITIONS];
 	int FSType;
 	char proposed_label[16];
 	BOOL has_protective_mbr;
@@ -362,23 +362,30 @@ typedef struct {
 	} ClusterSize[FS_MAX];
 } RUFUS_DRIVE_INFO;
 extern RUFUS_DRIVE_INFO SelectedDrive;
-extern uint64_t partition_offset[3];
+extern int partition_index[PI_MAX];
 
 BOOL SetAutoMount(BOOL enable);
 BOOL GetAutoMount(BOOL* enabled);
 char* GetPhysicalName(DWORD DriveIndex);
-BOOL DeletePartitions(DWORD DriveIndex);
+BOOL DeletePartition(DWORD DriveIndex, ULONGLONG PartitionOffset, BOOL bSilent);
+BOOL IsVdsAvailable(BOOL bSilent);
+BOOL ListVdsVolumes(BOOL bSilent);
+BOOL VdsRescan(DWORD dwRescanType, DWORD dwSleepTime, BOOL bSilent);
 HANDLE GetPhysicalHandle(DWORD DriveIndex, BOOL bLockDrive, BOOL bWriteAccess, BOOL bWriteShare);
 char* GetLogicalName(DWORD DriveIndex, uint64_t PartitionOffset, BOOL bKeepTrailingBackslash, BOOL bSilent);
 char* AltGetLogicalName(DWORD DriveIndex, uint64_t PartitionOffset, BOOL bKeepTrailingBackslash, BOOL bSilent);
+char* GetExtPartitionName(DWORD DriveIndex, uint64_t PartitionOffset);
 BOOL WaitForLogical(DWORD DriveIndex, uint64_t PartitionOffset);
 HANDLE GetLogicalHandle(DWORD DriveIndex, uint64_t PartitionOffset, BOOL bLockDrive, BOOL bWriteAccess, BOOL bWriteShare);
+HANDLE AltGetLogicalHandle(DWORD DriveIndex, uint64_t PartitionOffset, BOOL bLockDrive, BOOL bWriteAccess, BOOL bWriteShare);
 int GetDriveNumber(HANDLE hDrive, char* path);
 BOOL GetDriveLetters(DWORD DriveIndex, char* drive_letters);
 UINT GetDriveTypeFromIndex(DWORD DriveIndex);
 char GetUnusedDriveLetter(void);
 BOOL IsDriveLetterInUse(const char drive_letter);
-BOOL GetDriveLabel(DWORD DriveIndex, char* letter, char** label);
+BOOL IsSourceImageLocatedOnTargetDrive(DWORD DriveIndex);
+char RemoveDriveLetters(DWORD DriveIndex, BOOL bUseLast, BOOL bSilent);
+BOOL GetDriveLabel(DWORD DriveIndex, char* letters, char** label, BOOL bSilent);
 uint64_t GetDriveSize(DWORD DriveIndex);
 BOOL IsMediaPresent(DWORD DriveIndex);
 BOOL AnalyzeMBR(HANDLE hPhysicalDrive, const char* TargetName, BOOL bSilent);
@@ -388,16 +395,21 @@ BOOL UnmountVolume(HANDLE hDrive);
 BOOL MountVolume(char* drive_name, char *drive_guid);
 BOOL AltUnmountVolume(const char* drive_name, BOOL bSilent);
 char* AltMountVolume(DWORD DriveIndex, uint64_t PartitionOffset, BOOL bSilent);
-BOOL RemountVolume(char* drive_name);
+BOOL RemountVolume(char* drive_name, BOOL bSilent);
 BOOL CreatePartition(HANDLE hDrive, int partition_style, int file_system, BOOL mbr_uefi_marker, uint8_t extra_partitions);
 BOOL InitializeDisk(HANDLE hDrive);
 BOOL RefreshDriveLayout(HANDLE hDrive);
 const char* GetMBRPartitionType(const uint8_t type);
 const char* GetGPTPartitionType(const GUID* guid);
 const char* GetExtFsLabel(DWORD DriveIndex, uint64_t PartitionOffset);
+void ClearDrives(void);
 BOOL GetDevices(DWORD devnum);
 BOOL CyclePort(int index);
 int CycleDevice(int index);
 BOOL RefreshLayout(DWORD DriveIndex);
 BOOL GetOpticalMedia(IMG_SAVE* img_save);
+int64_t GetEspOffset(HANDLE hPhysical);
 BOOL ToggleEsp(DWORD DriveIndex, uint64_t PartitionOffset);
+const char* GetFsName(HANDLE hPhysical, LARGE_INTEGER StartingOffset);
+BOOL IsMsDevDrive(DWORD DriveIndex);
+BOOL IsFilteredDrive(DWORD DriveIndex);

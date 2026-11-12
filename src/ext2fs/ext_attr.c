@@ -1438,7 +1438,7 @@ static errcode_t xattr_array_update(struct ext2_xattr_handle *h,
 		return 0;
 	}
 
-	if (h->ibody_count <= old_idx) {
+	if (old_idx >= 0 && h->ibody_count <= old_idx) {
 		block_free += EXT2_EXT_ATTR_LEN(name_len);
 		if (!h->attrs[old_idx].ea_ino)
 			block_free +=
@@ -1550,14 +1550,15 @@ errcode_t ext2fs_xattr_set(struct ext2_xattr_handle *h,
 						       new_value, &value_len);
 		if (ret)
 			goto out;
-	} else
+	} else if (value_len)
 		memcpy(new_value, value, value_len);
 
 	/* Imitate kernel behavior by skipping update if value is the same. */
 	for (x = h->attrs; x < h->attrs + h->count; x++) {
 		if (!strcmp(x->name, name)) {
 			if (!x->ea_ino && x->value_len == value_len &&
-			    !memcmp(x->value, new_value, value_len)) {
+			    (!value_len ||
+			     !memcmp(x->value, new_value, value_len))) {
 				ret = 0;
 				goto out;
 			}

@@ -11,6 +11,7 @@
  */
 
 #include "config.h"
+#include <assert.h>
 #include <stdio.h>
 #include <string.h>
 #if HAVE_UNISTD_H
@@ -189,6 +190,9 @@ errcode_t ext2fs_initialize(const char *name, int flags,
 
 	assign_field(s_encoding);
 	assign_field(s_encoding_flags);
+
+//	if (ext2fs_has_feature_casefold(param))
+//		fs->encoding = ext2fs_load_nls_table(param->s_encoding);
 
 	if (super->s_feature_incompat & ~EXT2_LIB_FEATURE_INCOMPAT_SUPP) {
 		retval = EXT2_ET_UNSUPP_FEATURE;
@@ -371,7 +375,9 @@ ipg_retry:
 	 * adjust inode count to reflect the adjusted inodes_per_group
 	 */
 	if ((__u64)super->s_inodes_per_group * fs->group_desc_count > ~0U) {
-		ipg--;
+		assert(ipg != 0);
+		if (ipg != 0)
+			ipg--;
 		goto ipg_retry;
 	}
 	super->s_inodes_count = super->s_inodes_per_group *
